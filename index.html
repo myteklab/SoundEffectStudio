@@ -1264,8 +1264,27 @@
             console.log('Project data loaded successfully');
         }
 
+        // Save project (standalone: downloads JSON, platform adapter overrides this)
+        window.saveProject = function() {
+            var data = serializeProjectData();
+            if (!data) return;
+            var json = JSON.stringify(data, null, 2);
+            var blob = new Blob([json], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'sound-effect-project.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Project downloaded', 'success');
+        };
+
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            // Save button
+            document.getElementById('saveBtn').addEventListener('click', function() {
+                window.saveProject();
+            });
             // Tutorial buttons
             document.getElementById('tutorialBtn').addEventListener('click', startTutorial);
             document.getElementById('tutorialNext').addEventListener('click', nextTutorialStep);
