@@ -755,9 +755,35 @@
             from { transform: translateY(0); }
             to { transform: translateY(-10px); }
         }
+
+        /* Embedded mode - hide standalone UI elements */
+        body.embedded-mode #saveBtn,
+        body.embedded-mode #exportBtn,
+        body.embedded-mode #clearBtn,
+        body.embedded-mode #importSampleBtn,
+        body.embedded-mode #tutorialBtn {
+            display: none !important;
+        }
+
+        .embedded-banner {
+            display: none;
+            background: linear-gradient(135deg, #8a2be2 0%, #6a1bb2 100%);
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        body.embedded-mode .embedded-banner {
+            display: block;
+        }
     </style>
 </head>
 <body>
+    <div class="embedded-banner" id="embeddedBanner">
+        Editing sound for GameMaker — click <strong>"Save & Use Sound"</strong> above when done
+    </div>
     <div class="container">
         <div class="header">
             <h1>Sound Effect Studio</h1>
@@ -1149,6 +1175,53 @@
                 setTimeout(function() { toast.remove(); }, 300);
             }, 3000);
         }
+
+        // ============================================
+        // EMBEDDED MODE (GameMaker integration)
+        // ============================================
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var isEmbedded = params.get('embedded') === '1';
+            var embeddedProjectId = params.get('id') || null;
+
+            if (!isEmbedded) return;
+
+            document.body.classList.add('embedded-mode');
+
+            // Listen for messages from parent (GameMaker)
+            window.addEventListener('message', function(event) {
+                var msg = event.data;
+                if (!msg || !msg.action) return;
+
+                if (msg.action === 'loadData') {
+                    // Parent is sending project data to load
+                    loadProjectData(msg.data);
+                }
+
+                if (msg.action === 'save') {
+                    // Parent wants us to serialize and send back data
+                    var data = serializeProjectData();
+                    event.source.postMessage({
+                        action: 'saveComplete',
+                        projectId: embeddedProjectId,
+                        data: data
+                    }, event.origin);
+                }
+            });
+
+            // Send ready message once sound engine and UI are available
+            function waitForReady() {
+                if (typeof soundEngine !== 'undefined' && typeof uiController !== 'undefined') {
+                    window.parent.postMessage({
+                        action: 'ready',
+                        projectId: embeddedProjectId
+                    }, '*');
+                } else {
+                    setTimeout(waitForReady, 100);
+                }
+            }
+            waitForReady();
+        })();
 
         // Track unsaved changes
         var hasUnsavedChanges = false;
