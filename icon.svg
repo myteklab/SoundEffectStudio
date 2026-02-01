@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c5ce7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a29bfe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3436;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00cec9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#81ecec;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00cec9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="knobGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#636e72;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d3436;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#iconGrad)"/>
+
+  <!-- Main panel/device -->
+  <rect x="100" y="120" width="312" height="272" rx="20" fill="url(#panelGrad)" stroke="#1a1a2e" stroke-width="6"/>
+
+  <!-- Screen/display area -->
+  <rect x="125" y="145" width="262" height="120" rx="10" fill="#0d1117" stroke="#3d3d3d" stroke-width="2"/>
+
+  <!-- Waveform visualization -->
+  <path d="M 140 205
+           Q 160 165, 180 205
+           Q 200 245, 220 205
+           Q 240 165, 260 205
+           Q 280 245, 300 205
+           Q 320 165, 340 205
+           Q 360 245, 370 205"
+        fill="none" stroke="url(#waveGrad)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Secondary waveform (sine wave) -->
+  <path d="M 140 205
+           Q 175 185, 210 205
+           Q 245 225, 280 205
+           Q 315 185, 350 205
+           Q 365 215, 370 205"
+        fill="none" stroke="#fd79a8" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Grid lines on display -->
+  <line x1="140" y1="175" x2="370" y2="175" stroke="#2d3436" stroke-width="1" opacity="0.5"/>
+  <line x1="140" y1="205" x2="370" y2="205" stroke="#2d3436" stroke-width="1" opacity="0.5"/>
+  <line x1="140" y1="235" x2="370" y2="235" stroke="#2d3436" stroke-width="1" opacity="0.5"/>
+
+  <!-- Control knobs row -->
+  <!-- Knob 1 - Frequency -->
+  <circle cx="160" cy="320" r="28" fill="url(#knobGrad)" stroke="#4a4a5a" stroke-width="3"/>
+  <circle cx="160" cy="320" r="20" fill="#2d3436"/>
+  <line x1="160" y1="300" x2="160" y2="310" stroke="#00cec9" stroke-width="3" stroke-linecap="round"/>
+  <text x="160" y="360" text-anchor="middle" fill="#b2bec3" font-size="12" font-family="Arial">FREQ</text>
+
+  <!-- Knob 2 - Attack -->
+  <circle cx="235" cy="320" r="28" fill="url(#knobGrad)" stroke="#4a4a5a" stroke-width="3"/>
+  <circle cx="235" cy="320" r="20" fill="#2d3436"/>
+  <line x1="235" y1="300" x2="245" y2="308" stroke="#fdcb6e" stroke-width="3" stroke-linecap="round"/>
+  <text x="235" y="360" text-anchor="middle" fill="#b2bec3" font-size="12" font-family="Arial">ATK</text>
+
+  <!-- Knob 3 - Decay -->
+  <circle cx="310" cy="320" r="28" fill="url(#knobGrad)" stroke="#4a4a5a" stroke-width="3"/>
+  <circle cx="310" cy="320" r="20" fill="#2d3436"/>
+  <line x1="310" y1="300" x2="320" y2="305" stroke="#e17055" stroke-width="3" stroke-linecap="round"/>
+  <text x="310" y="360" text-anchor="middle" fill="#b2bec3" font-size="12" font-family="Arial">DEC</text>
+
+  <!-- Play button -->
+  <circle cx="375" cy="320" r="22" fill="#27ae60" stroke="#1e8449" stroke-width="3"/>
+  <path d="M 368 310 L 368 330 L 385 320 Z" fill="#fff"/>
+
+  <!-- Speaker/sound waves emanating (top right) -->
+  <path d="M 380 100 Q 400 110, 395 130" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 390 90 Q 420 105, 410 140" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 400 80 Q 440 100, 425 150" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.2"/>
+
+  <!-- LED indicators -->
+  <circle cx="135" y="135" r="5" fill="#00b894"/>
+  <circle cx="155" y="135" r="5" fill="#fdcb6e"/>
+  <circle cx="175" y="135" r="5" fill="#e17055" opacity="0.3"/>
+
+  <!-- Title on panel -->
+  <text x="256" y="138" text-anchor="middle" fill="#636e72" font-size="11" font-family="Arial" font-weight="bold">SFX STUDIO</text>
+</svg>
