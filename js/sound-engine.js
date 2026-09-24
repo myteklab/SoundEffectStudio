@@ -98,9 +98,9 @@ class SoundEngine {
             delay: config.delay || 0, // Delay before layer starts (in seconds)
             attack: config.attack || 0.01,
             decay: config.decay || 0.1,
-            sustain: config.sustain || 0.5,
-            release: config.release || 0.2,
-            volume: config.volume || 0.8,  // Increased from 0.5 to 0.8
+            sustain: config.sustain ?? 0.5,
+            release: config.release ?? 0.2,
+            volume: config.volume ?? 0.8,  // Increased from 0.5 to 0.8
             enabled: true,
             // Sample-specific properties
             audioBuffer: config.audioBuffer || null,
@@ -349,7 +349,7 @@ class SoundEngine {
         // ADSR Envelope
         const attackTime = layer.attack || 0.001;
         const decayTime = layer.decay || 0.01;
-        const sustainLevel = (layer.sustain || 1.0) * layer.volume;
+        const sustainLevel = (layer.sustain ?? 1.0) * layer.volume;
         const releaseTime = layer.release || 0.01;
 
         // Calculate effective duration (considering pitch and layer duration)
@@ -530,7 +530,7 @@ class SoundEngine {
                 // ADSR Envelope
                 const attackTime = layer.attack || 0.001;
                 const decayTime = layer.decay || 0.01;
-                const sustainLevel = (layer.sustain || 1.0) * layer.volume;
+                const sustainLevel = (layer.sustain ?? 1.0) * layer.volume;
                 const releaseTime = layer.release || 0.01;
 
                 // Calculate effective duration (considering pitch)
@@ -837,7 +837,7 @@ class SoundEngine {
         // ADSR Envelope
         const attackTime = layer.attack || 0.001;
         const decayTime = layer.decay || 0.01;
-        const sustainLevel = (layer.sustain || 1.0) * layer.volume;
+        const sustainLevel = (layer.sustain ?? 1.0) * layer.volume;
         const releaseTime = layer.release || 0.01;
 
         // Calculate effective duration (considering pitch and layer duration)
